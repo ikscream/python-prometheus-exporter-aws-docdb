@@ -1,0 +1,4 @@
+pymongo
+prometheus-client
+flask
+click
