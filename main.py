@@ -5,6 +5,7 @@ from prometheus_client import generate_latest, Gauge
 import pymongo
 import logging
 import os
+import gc
 
 logger = logging.getLogger(__name__)
 app = Flask(__name__)
@@ -43,6 +44,7 @@ def get_data():
     docdb_connection_totalCreated.set(connections_dict['totalCreated'])
 
     client.close()
+    gc.collect()
     return Response(generate_latest(), mimetype=CONTENT_TYPE_LATEST)
 
 if __name__ == '__main__':
