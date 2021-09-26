@@ -1,4 +1,4 @@
-from click.decorators import password_option
+from click.decorators import option, password_option
 from flask import Flask, send_file, request, Response
 
 from prometheus_client import generate_latest, Gauge
@@ -32,8 +32,10 @@ def get_data():
 
     password = os.environ['DOCDB_PASSWORD']
     host = os.environ['DOCDB_HOST']
-
-    client = pymongo.MongoClient(f"mongodb://root:{password}@{host}:27017/?tls=true&tlsCAFile=rds-combined-ca-bundle.pem&replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false") 
+    options = ""
+    if os.environ['DOCDB_TLS'] == 1:
+        options = "/?tls=true&tlsCAFile=rds-combined-ca-bundle.pem&replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false"
+    client = pymongo.MongoClient(f"mongodb://root:{password}@{host}:27017{options}") 
     
     db = client.sample_databasevim 
 

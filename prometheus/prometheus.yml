@@ -1,0 +1,13 @@
+global:
+  scrape_interval: 1s
+
+scrape_configs:
+  - job_name: "mongodb"
+    scrape_interval: 1s
+    static_configs:
+    - targets: ["exporter-docdb:5000"]
+
+  - job_name: "cadvisor"
+    scrape_interval: 1s
+    static_configs:
+    - targets: ["cadvisor:8080"]

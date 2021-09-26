@@ -9,6 +9,7 @@ Little prometheus exporter for Amazon DocumentDB with default `TLS`.
 |PORT|Specify port for exporter|5000|
 |DOCDB_HOST|DocumentDB host|example.com|
 |DOCDB_PASSWORD|DocumentDB password|password|
+|DOCDB_TLS|Enable TLS|1 (enabled)| 
 
 ### Metrics
 
@@ -21,5 +22,16 @@ Little prometheus exporter for Amazon DocumentDB with default `TLS`.
 ### Docker 
 
 ```
-docker pull debugger0/exporter-docdb:v1.0
+docker pull debugger0/exporter-docdb
 ```
+
+
+### Local tests
+
+```
+docker-compose up --build --abort-on-container-exit
+```
+
+#### Local environment configuration
+
+`systemd.unified_cgroup_hierarchy=0` for advisor in kernel options
